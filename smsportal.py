@@ -37,9 +37,6 @@ def _resolve_log_path() -> str:
     return 'smsportal.log'
 
 if __name__ == "__main__":
-    apiKey = smsportal_api_key
-    apiSecret = smsportal_api_secret
-
     LOG_PATH = _resolve_log_path()
     logging.basicConfig(
         filename=LOG_PATH,
@@ -49,9 +46,17 @@ if __name__ == "__main__":
     logger = logging.getLogger(__name__)
     logger.info("Starting smsportal; logging to %s", LOG_PATH)
 
+    # Read credentials from environment variables
+    apiKey = os.getenv('SMSPORTAL_API_KEY')
+    apiSecret = os.getenv('SMSPORTAL_API_SECRET')
+
+    if not apiKey or not apiSecret:
+        logger.error("Missing SMSPORTAL_API_KEY or SMSPORTAL_API_SECRET environment variables.")
+        sys.exit(1)
+
     basic = HTTPBasicAuth(apiKey, apiSecret)
     message = "This is a test message from smsportal at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cellphone = "35699782805"
+    cellphone = "27825720582" #"35699782805"
     sendRequest = {"messages": [{"content": message, "destination": cellphone, "customerId": "optimax_test_2"},
                                 ]}
 
