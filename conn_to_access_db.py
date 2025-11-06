@@ -7,7 +7,7 @@ conn = pyodbc.connect(
 )
 cur = conn.cursor()
 
-cur.execute("UPDATE Invoice SET [Addr1] = ?", ("Test",))
+cur.execute("UPDATE Invoice SET [Addr1] = ? WHERE TxnNo = ?", ("Test", 127285))
 print(f"Rows updated: {cur.rowcount}")
 
 conn.commit()
@@ -20,6 +20,7 @@ for row in cur.fetchall():
         print(getattr(row, "Patient", None))
         print(getattr(row, "Name", None))
         print(getattr(row, "Addr1", None))
+        print(getattr(row, "TxnNo", None))
     except Exception:
         print(row)
 
