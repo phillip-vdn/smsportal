@@ -47,8 +47,8 @@ if __name__ == "__main__":
     logger.info("Starting smsportal; logging to %s", LOG_PATH)
 
     # Read credentials from environment variables
-    apiKey = os.getenv('SMSPORTAL_API_KEY')
-    apiSecret = os.getenv('SMSPORTAL_API_SECRET')
+    apiKey = '2a5607f5-426c-45b4-b8fe-5dc21c125f86' # os.getenv('SMSPORTAL_API_KEY')
+    apiSecret = '4e093bc6-6db3-4e5e-b86f-fb74d585ed8e' # os.getenv('SMSPORTAL_API_SECRET')
 
     if not apiKey or not apiSecret:
         logger.error("Missing SMSPORTAL_API_KEY or SMSPORTAL_API_SECRET environment variables.")
@@ -56,25 +56,11 @@ if __name__ == "__main__":
 
     basic = HTTPBasicAuth(apiKey, apiSecret)
     message = "This is a test message from smsportal at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cellphone = "27825720582" #"35699782805"
-    sendRequest = {"messages": [{"content": message, "destination": cellphone, "customerId": "optimax_test_2"},
+    cellphone1 = "264816011868" #"27825720582" #"35699782805"
+    cellphone2 = "35699782805"
+    sendRequest = {"messages": [{"content": message, "destination": cellphone1, "customerId": "optimax_test_2"},
+                                {"content": message, "destination": cellphone2, "customerId": "optimax_test_2"}
                                 ]}
-
-    # sendRequest = {"messages": [{"content": "MS E TEST FLASH SALE! 10 - 19 July!! 20 PERCENT off selected frames. Book now 0819542400 or 2401", "destination": "0825720582"},
-    #                 {"content": "BLACK NOVEMBER! 20%30%50% DISCOUNT FOR EVERY FAMILY MEMBER. CALL FOR APPOINTMENT 061 000000", "destination": "0825720582"},
-    #                 {"content": "Testing sms portal message", "destination": "0825720582"},
-    #                 {"content": "MS E TEST FLASH SALE! 10 - 19 July!! 20 PERCENT off selected frames. Book now 0819542400 or 2401", "destination": "35699782805"},
-    #                 {"content": "BLACK NOVEMBER! 20%30%50% DISCOUNT FOR EVERY FAMILY MEMBER. CALL FOR APPOINTMENT 061 000000", "destination": "35699782805"},
-    #                 {"content": "Testing sms portal message", "destination": "35699782805"},
-    #                 {"content": "MS E TEST FLASH SALE! 10 - 19 July!! 20 PERCENT off selected frames. Book now 0819542400 or 2401", "destination": "0832805061"},
-    #                 {"content": "BLACK NOVEMBER! 20%30%50% DISCOUNT FOR EVERY FAMILY MEMBER. CALL FOR APPOINTMENT 061 000000", "destination": "0832805061"},
-    #                 {"content": "Testing sms portal message", "destination": "0832805061"},
-    #                 {"content": "MS E TEST FLASH SALE! 10 - 19 July!! 20 PERCENT off selected frames. Boo,k now 0819542400 or 2401", "destination": "0820423320"},
-    #                 {"content": "BLACK NOVEMBER! 20%30%50% DISCOUNT FOR EVERY FAMILY MEMBER. CALL FOR APPOINTMENT 061 000000", "destination": "0820423320"},
-    #                 {"content": "Testing sms portal message", "destination": "0820423320"},
-    #                 {"content": "MS E TEST FLASH SALE! 10 - 19 July!! 20 PERCENT off selected frames. Book now 0819542400 or 2401", "destination": "0846934142"},
-    #                 {"content": "BLACK NOVEMBER! 20%30%50% DISCOUNT FOR EVERY FAMILY MEMBER. CALL FOR APPOINTMENT 061 000000", "destination": "0846934142"},
-    #                 {"content": "Testing sms portal message", "destination": "0846934142"}]}
 
     try:
         sendResponse = requests.post(
