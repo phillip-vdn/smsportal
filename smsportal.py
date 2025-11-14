@@ -47,8 +47,8 @@ if __name__ == "__main__":
     logger.info("Starting smsportal; logging to %s", LOG_PATH)
 
     # Read credentials from environment variables
-    apiKey = '2a5607f5-426c-45b4-b8fe-5dc21c125f86' # os.getenv('SMSPORTAL_API_KEY')
-    apiSecret = '4e093bc6-6db3-4e5e-b86f-fb74d585ed8e' # os.getenv('SMSPORTAL_API_SECRET')
+    apiKey = os.getenv('SMSPORTAL_API_KEY')
+    apiSecret = os.getenv('SMSPORTAL_API_SECRET')
 
     if not apiKey or not apiSecret:
         logger.error("Missing SMSPORTAL_API_KEY or SMSPORTAL_API_SECRET environment variables.")
